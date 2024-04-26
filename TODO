@@ -1,0 +1,18 @@
+
+"""add 2000 student to apps_student table"""
+
+INSERT INTO apps_student (id, first_name, last_name, email)
+SELECT
+  row_number() OVER (ORDER BY random()),
+  substr(md5(random()::text), 1, 20),
+  substr(md5(random()::text), 1, 20),
+  substr(md5(random()::text), 1, 20) || '@gmail.com'
+FROM generate_series(1, 2000);
+
+
+"""MINIO configuration"""
+
+MINIO_ACCESS_KEY = lBmLDH2ogUK5ZDuVJqHX
+MINIO_SECRET_KEY = kplE1FoNVIUFHndZfwoYKd6Y41BcvU6ok1cPtBC1
+MINIO_BUCKET_NAME = exam
+MINIO_ENDPOINT = http://localhost:9000
